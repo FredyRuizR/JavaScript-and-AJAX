@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DESARROLLO DE APLICACIONES EN RED COON AJAX</title>
+  <script src="index.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <style>html {
+    min-height: 100%;
+    position: relative;
+  }
+  
+  body {
+    margin: 0;
+    margin-bottom: 40px;
+  }
+  
+  .color-container {
+    background: #1E2D40;
+  }
+  
+  li:hover {
+    background-color: bisque;
+  }
+  
+  .text-end button:hover {
+    background-color: bisque;
+  }
+  
+  .container-main {
+    display: flex;
+    margin-left: 100px;
+  }
+  
+  h2 {
+    margin-bottom: 0;
+    font-size: 1.8em;
+    border: 2px solid #1E2D40;
+    background: #35707b;
+    color: white;
+  }
+  
+  form {
+    border: 2px solid #1E2D40;
+    color: rgb(0, 0, 0);
+  }
+  
+  #recurso,
+  #enviar {
+    padding: 0.3em;
+    font-size: 1.3em;
+  }
+  
+  #enviar:hover {
+    background-color: bisque;
+  }
+  
+  #principal {
+    float: left;
+    width: 70%;
+  }
+  
+  #secundario {
+    float: right;
+    width: 25%;
+  }
+  
+  #contenidos,
+  #estados,
+  #cabeceras,
+  #codigo {
+    border: 2px solid #1E2D40;
+    background: #FDF4D9; /* Amarillo claro */
+    padding: 1em;
+    white-space: pre;
+  }
+  
+  #contenidos {
+    min-height: 300px;
+    max-height: 400px;
+    overflow: scroll;
+  }
+  
+  #estados {
+    min-height: 200px;
+  }
+  
+  #cabeceras {
+    min-height: 150px;
+  }
+  
+  #codigo {
+    min-height: 100px;
+    font-size: 1.5em;
+  }
+  
+  #result {
+    background: #FDF4D9; /* Amarillo claro */
+    border: 2px solid #1E2D40;
+    height: 50px;
+  }
+  </style>
+</head>
+<body>
+  <h1>DESARROLLO DE APLICACIONES EN RED</h1>
+
+  <h2>Sección JavaScript</h2>
+  <textarea id="inputText" rows="4" cols="50"></textarea>
+  <button onclick="checkPalindrome()">Comprobar Palíndromo</button>
+  <br><br>
+  <input type="text" id="num1" placeholder="Primer número">
+  <input type="text" id="num2" placeholder="Segundo número">
+  <button onclick="findMax()">Encontrar el Mayor</button>
+  <br><br>
+  <textarea id="inputText2" rows="4" cols="50"></textarea>
+  <button onclick="findVowels()">Encontrar Vocales</button>
+  <br><br>
+  <textarea id="inputText3" rows="4" cols="50"></textarea>
+  <button onclick="countVowels()">Contar Vocales</button>
+
+  <h2>Sección AJAX</h2>
+  <input type="text" id="urlInput" placeholder="URL">
+  <button onclick="showContents()">Mostrar Contenidos</button>
+  <br><br>
+  <div id="status"></div>
+  <div id="responseHeaders"></div>
+  <div id="statusCode"></div>
+  <div id="content"></div>
+
+  <script>
+    // AJAX functions
+    function showContents() {
+      var url = document.getElementById("urlInput").value;
+      var xhr = new XMLHttpRequest();
+
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 1) {
+          document.getElementById("status").innerText = "Estado: Cargando...";
+        } else if (xhr.readyState === 4) {
+          document.getElementById("status").innerText = "Estado: Completado";
+          document.getElementById("responseHeaders").innerText = "Cabeceras HTTP de la respuesta:\n" + xhr.getAllResponseHeaders();
+          document.getElementById("statusCode").innerText = "Código de estado: " + xhr.status + " " + xhr.statusText;
+          document.getElementById("content").innerText = "Contenido:\n" + xhr.responseText;
+        }
+      };
+
+      xhr.open("GET", url, true);
+      xhr.send();
+    }
+  </script>
+</body>
+</html>
